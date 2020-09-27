@@ -13,6 +13,7 @@
 #include <vector>
 #include "helper_functions.h"
 
+using std::vector;
 struct Particle {
   int id;
   double x;
@@ -120,6 +121,10 @@ class ParticleFilter {
   
   // Vector of weights of all particles
   std::vector<double> weights; 
+  // Multivariate -gaussian probability
+  double multiv_prob(double sig_x, double sig_y, double x_obs, double y_obs,
+                   double mu_x, double mu_y);
+  double calculate_weight(const vector<LandmarkObs> &observations, Particle &particle, vector<LandmarkObs> close_landmark_list, double sig_x, double sig_y) ;
 };
 
 #endif  // PARTICLE_FILTER_H_
