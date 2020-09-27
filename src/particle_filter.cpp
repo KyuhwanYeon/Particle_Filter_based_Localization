@@ -52,6 +52,11 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
   normal_distribution<double> noise_y(0, std_pos[1]);
   normal_distribution<double> noise_theta(0, std_pos[2]);
 
+  // to avoid divide by 0
+  if (fabs(yaw_rate) < 0.0001)
+  {
+    yaw_rate = 0.0001;
+  }
   for (int i = 0; i < num_particles; ++i)
   {
     double pre_x = particles[i].x;
